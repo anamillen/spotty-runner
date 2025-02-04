@@ -355,7 +355,7 @@
             document.querySelector('.' + Runner.classes.ICON).style.visibility =
                 'hidden';
 
-            this.adjustDimensions();
+            //TODO: this.adjustDimensions();
             this.setSpeed();
 
             this.containerEl = document.createElement('div');
@@ -368,7 +368,7 @@
             this.canvasCtx = this.canvas.getContext('2d');
             this.canvasCtx.fillStyle = '#f7f7f7';
             this.canvasCtx.fill();
-            Runner.updateCanvasScaling(this.canvas);
+            //TODO: Runner.updateCanvasScaling(this.canvas);
 
             // Horizon contains clouds, obstacles and the ground.
             this.horizon = new Horizon(this.canvas, this.spriteDef, this.dimensions,
@@ -424,18 +424,18 @@
             var padding = Number(boxStyles.paddingLeft.substr(0,
                 boxStyles.paddingLeft.length - 2));
 
-            this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
-            this.dimensions.WIDTH = Math.min(DEFAULT_WIDTH, this.dimensions.WIDTH); //Arcade Mode
+            //TODO: this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
+            //TODO: this.dimensions.WIDTH = Math.min(DEFAULT_WIDTH, this.dimensions.WIDTH); //Arcade Mode
             if (this.activated) {
-                this.setArcadeModeContainerScale();
+                //TODO: this.setArcadeModeContainerScale();
             }
             
             // Redraw the elements back onto the canvas.
             if (this.canvas) {
-                this.canvas.width = this.dimensions.WIDTH;
-                this.canvas.height = this.dimensions.HEIGHT;
+                //TODO: this.canvas.width = this.dimensions.WIDTH;
+                //TODO: this.canvas.height = this.dimensions.HEIGHT;
 
-                Runner.updateCanvasScaling(this.canvas);
+                //TODO: Runner.updateCanvasScaling(this.canvas);
 
                 this.distanceMeter.calcXPos(this.dimensions.WIDTH);
                 this.clearCanvas();
