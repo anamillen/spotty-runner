@@ -427,7 +427,8 @@
             //TODO: this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
             //TODO: this.dimensions.WIDTH = Math.min(DEFAULT_WIDTH, this.dimensions.WIDTH); //Arcade Mode
             if (this.activated) {
-                //TODO: this.setArcadeModeContainerScale();
+                //TODO: this line below readjusts the canvas when the browser window is resized
+                this.setArcadeModeContainerScale();
             }
             
             // Redraw the elements back onto the canvas.
@@ -444,6 +445,7 @@
 
                 // Outer container and distance meter.
                 if (this.playing || this.crashed || this.paused) {
+                    //TODO:
                     this.containerEl.style.width = this.dimensions.WIDTH + 'px';
                     this.containerEl.style.height = this.dimensions.HEIGHT + 'px';
                     this.distanceMeter.update(0, Math.ceil(this.distanceRan));
@@ -483,8 +485,8 @@
 
                 this.containerEl.addEventListener(Runner.events.ANIM_END,
                     this.startGame.bind(this));
-
-                this.containerEl.style.webkitAnimation = 'intro .4s ease-out 1 both';
+                //TODO: COMMENTED OUT .4s from 'intro ease-out 1 both';
+                this.containerEl.style.webkitAnimation = 'intro  ease-out 1 both';
                 this.containerEl.style.width = this.dimensions.WIDTH + 'px';
 
                 // if (this.touchController) {
@@ -868,8 +870,9 @@
                   window.devicePixelRatio;
 
             const cssScale = scale;
+            //TODO: commenting out these two lines below will disable the zoom animation
             this.containerEl.style.transform =
-                'scale(' + cssScale + ') translateY(' + translateY + 'px)';
+                 'scale(' + cssScale + ') translateY(' + translateY + 'px)';
         },
         
         /**
@@ -2745,8 +2748,33 @@
 })();
 
 
+function meow() {
+    console.log("text");
+    /*
+    const windowHeight = window.innerHeight;
+    const scaleHeight = windowHeight / this.dimensions.HEIGHT;
+    const scaleWidth = window.innerWidth / this.dimensions.WIDTH;
+    const scale = Math.max(1, Math.min(scaleHeight, scaleWidth));
+    const scaledCanvasHeight = this.dimensions.HEIGHT * scale;
+    // Positions the game container at 10% of the available vertical window
+    // height minus the game container height.
+    const translateY = Math.ceil(Math.max(0, (windowHeight - scaledCanvasHeight -
+                                              Runner.config.ARCADE_MODE_INITIAL_TOP_POSITION) *
+                                          Runner.config.ARCADE_MODE_TOP_POSITION_PERCENT)) *
+          window.devicePixelRatio;
+
+    const cssScale = scale;
+    //TODO: commenting out these two lines below will disable the zoom animation
+    this.containerEl.style.transform =
+         'scale(' + cssScale + ') translateY(' + translateY + 'px)';
+    */
+};
+
+
 function onDocumentLoad() {
     new Runner('.interstitial-wrapper');
+    meow();
 }
 
 document.addEventListener('DOMContentLoaded', onDocumentLoad);
+
