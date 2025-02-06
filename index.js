@@ -397,10 +397,11 @@
             }
 
             this.startListening();
-            this.update();
-        
             window.addEventListener(Runner.events.RESIZE,
                 this.debounceResize.bind(this));
+            this.update();
+        
+            
             
         },
 
@@ -514,6 +515,7 @@
                 //TODO: COMMENTED OUT .4s from 'intro ease-out 1 both';
                 this.containerEl.style.webkitAnimation = 'intro ease-out 0 both';
                 this.containerEl.style.width = this.dimensions.WIDTH + 'px';
+                //this.containerEl.style.display = 'inline-block';
                 
 
                 // if (this.touchController) {
@@ -2535,6 +2537,7 @@
          * Draw the horizon line.
          */
         draw: function () {
+            //TODO: if (this.end_of_resize){
             this.canvasCtx.drawImage(Runner.imageSprite, this.sourceXPos[0],
                 this.spritePos.y,
                 this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
@@ -2546,6 +2549,7 @@
                 this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
                 this.xPos[1], this.yPos,
                 this.dimensions.WIDTH, this.dimensions.HEIGHT);
+            //TODO: } 
         },
 
         /**
@@ -2581,8 +2585,7 @@
                 this.updateXPos(1, increment);
             }
             //TODO: THE LINE BELOW SHOWS THE HORIZON LINE
-
-            this.draw();
+                this.draw();
         },
 
         /**
@@ -2819,24 +2822,6 @@
 
 function meow() {
     console.log("text");
-    /*
-    const windowHeight = window.innerHeight;
-    const scaleHeight = windowHeight / this.dimensions.HEIGHT;
-    const scaleWidth = window.innerWidth / this.dimensions.WIDTH;
-    const scale = Math.max(1, Math.min(scaleHeight, scaleWidth));
-    const scaledCanvasHeight = this.dimensions.HEIGHT * scale;
-    // Positions the game container at 10% of the available vertical window
-    // height minus the game container height.
-    const translateY = Math.ceil(Math.max(0, (windowHeight - scaledCanvasHeight -
-                                              Runner.config.ARCADE_MODE_INITIAL_TOP_POSITION) *
-                                          Runner.config.ARCADE_MODE_TOP_POSITION_PERCENT)) *
-          window.devicePixelRatio;
-
-    const cssScale = scale;
-    //TODO: commenting out these two lines below will disable the zoom animation
-    this.containerEl.style.transform =
-         'scale(' + cssScale + ') translateY(' + translateY + 'px)';
-    */
 };
 
 
