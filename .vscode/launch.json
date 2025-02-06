@@ -8,7 +8,7 @@
             "type": "chrome",
             "request": "launch",
             "name": "Open index.html",
-            "file": "/ext/u123/milenkoa/Documents/code/forkmeow/t-rex-runner/index.html"
+            "file": "/home/oskorusha/Documents/приколы/links/Link to code/projects/spotty-runner/spotty-runner/index.html"
         }
     ]
 }

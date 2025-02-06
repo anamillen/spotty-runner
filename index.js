@@ -46,6 +46,8 @@
 
         this.activated = false; // Whether the easter egg has been activated.
         this.playing = false; // Whether the game is currently in play state.
+        //TODO: the parameter which will resize the window onload
+        this.window_resize = true
         this.crashed = false;
         this.paused = false;
         this.inverted = false;
@@ -466,6 +468,11 @@
          * Play the game intro.
          * Canvas container width expands out to the full width.
          */
+        //TODO: ici on fait de la merde
+        resizeWindow: function () {
+            this.containerEl.style.webkitAnimation = '.4s intro  ease-out 1 both';
+        },
+
         playIntro: function () {
             if (!this.activated && !this.crashed) {
                 this.playingIntro = true;
@@ -474,6 +481,7 @@
                 // CSS animation definition.
                 var keyframes = '@-webkit-keyframes intro { ' +
                     'from { width:' + Trex.config.WIDTH + 'px }' +
+                    //TODO: 'from { width:' + this.dimensions.WIDTH + 'px }' +
                     'to { width: ' + this.dimensions.WIDTH + 'px }' +
                     '}';
                 
@@ -486,7 +494,7 @@
                 this.containerEl.addEventListener(Runner.events.ANIM_END,
                     this.startGame.bind(this));
                 //TODO: COMMENTED OUT .4s from 'intro ease-out 1 both';
-                this.containerEl.style.webkitAnimation = 'intro  ease-out 1 both';
+                this.containerEl.style.webkitAnimation = '.4s intro  ease-out 1 both';
                 this.containerEl.style.width = this.dimensions.WIDTH + 'px';
 
                 // if (this.touchController) {
@@ -504,6 +512,7 @@
          * Update the game status to started.
          */
         startGame: function () {
+            //TODO: the resized window on start happens here
             this.setArcadeMode();
             this.runningTime = 0;
             this.playingIntro = false;
@@ -547,7 +556,13 @@
                 this.runningTime += deltaTime;
                 var hasObstacles = this.runningTime > this.config.CLEAR_TIME;
 
+                //TODO: trying to resize the window right on load
+                if (this.tRex.jumpCount == 0 && !this.playingIntro) {
+                    this.resizeWindow();
+                }
+
                 // First jump triggers the intro.
+
                 if (this.tRex.jumpCount == 1 && !this.playingIntro) {
                     this.playIntro();
                 }
@@ -684,6 +699,7 @@
                     e.type == Runner.events.TOUCHSTART)) {
                     if (!this.playing) {
                         this.loadSounds();
+                        //TODO: the line below desactivates the entire arcade regime
                         this.playing = true;
                         this.update();
                         if (window.errorPageController) {
@@ -857,7 +873,7 @@
          * Sets the scaling for arcade mode.
          */
         setArcadeModeContainerScale() {
-            const windowHeight = window.innerHeight;
+            const windowHeight =  window.innerHeight;
             const scaleHeight = windowHeight / this.dimensions.HEIGHT;
             const scaleWidth = window.innerWidth / this.dimensions.WIDTH;
             const scale = Math.max(1, Math.min(scaleHeight, scaleWidth));
