@@ -36,6 +36,7 @@
   height: 100vh; /* Make it full viewport height */
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Stack children vertically */
+  background-color: #a3bfc4;
   
 }
 
@@ -175,6 +176,7 @@
   top: 0;
   bottom: 0;
   z-index: 1;
+  background-color: rgb(65, 75, 59);
 }
 
 
