@@ -155,7 +155,8 @@
         INVERTED: 'inverted',
         SNACKBAR: 'snackbar',
         SNACKBAR_SHOW: 'snackbar-show',
-        TOUCH_CONTROLLER: 'controller'
+        TOUCH_CONTROLLER: 'controller',
+        BOTTOM_CONTAINER: 'bottom-container'
     };
 
 
@@ -385,6 +386,11 @@
             this.tRex = new Trex(this.canvas, this.spriteDef.TREX);
 
             this.outerContainerEl.appendChild(this.containerEl);
+            //TODO: bottom container
+            this.containerBottom = document.createElement('div');
+            this.outerContainerEl.appendChild(this.containerBottom);
+            this.containerBottom.className = Runner.classes.BOTTOM_CONTAINER;
+
 
             //TODO: 
             //this.setArcadeModeContainerScale();
