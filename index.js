@@ -746,7 +746,8 @@
         onKeyUp: function (e) {
             var keyCode = String(e.keyCode);
             var isjumpKey = Runner.keycodes.JUMP[keyCode] ||
-                e.type == Runner.events.TOUCHEND ||
+                //TODO: e.type == Runner.events.TOUCHEND ||
+                e.type == Runner.events.TOUCHSTART||
                 e.type == Runner.events.MOUSEDOWN;
 
             if (this.isRunning() && isjumpKey) {
@@ -764,7 +765,7 @@
                         Runner.keycodes.JUMP[keyCode])) {
                     this.restart();
                 }
-            } else if (this.paused && isjumpKey) {
+            } else if (isjumpKey) {
                 // Reset the jump state
                 this.tRex.reset();
                 this.play();
@@ -1895,6 +1896,7 @@
          * Reset the t-rex to running at start of game.
          */
         reset: function () {
+            //TODO:
             this.yPos = this.groundYPos;
             this.jumpVelocity = 0;
             this.jumping = false;
