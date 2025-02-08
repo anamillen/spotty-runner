@@ -573,6 +573,7 @@
                 // First jump triggers the intro.
                 if (this.tRex.jumpCount == 1 && !this.playingIntro) {
                     this.playIntro();
+                    this.introCount++;
                 }
 
                 // The horizon doesn't move until the intro is over.
@@ -709,14 +710,18 @@
                         this.loadSounds();
                         this.playing = true;
                         this.update();
+                        
                         if (window.errorPageController) {
                             errorPageController.trackEasterEgg();
                         }
                     }
                     //  Play sound effect and jump on starting the game for the first time.
-                    if (!this.tRex.jumping && !this.tRex.ducking) {
+                    if (!this.tRex.jumping && !this.tRex.ducking ) {
                         this.playSound(this.soundFx.BUTTON_PRESS);
-                        this.tRex.startJump(this.currentSpeed);
+                        //TODO: 'startJump"
+                        this.tRex.reset()
+                        //this.tRex.startJump(this.currentSpeed);
+
                     }
                 }
 
@@ -768,9 +773,8 @@
                 }
             } else if (this.paused && isjumpKey) {
                 // Reset the jump state
-                //TODO:
-                this.play();
                 this.tRex.reset();
+                this.play();
             }
         },
 
@@ -847,7 +851,7 @@
                 this.playing = true;
                 this.paused = false;
                 this.tRex.update(0, Trex.status.RUNNING);
-                //this.tRex.reset();
+                this.tRex.reset();
                 this.time = getTimeStamp();
                 this.update();
             }
@@ -1816,14 +1820,15 @@
          * @param {number} speed
          */
         startJump: function (speed) {
-            if (!this.jumping) {
+            if (!this.jumping ) {
                 this.update(0, Trex.status.JUMPING);
                 // Tweak the jump velocity based on the speed.
                 this.jumpVelocity = this.config.INIITAL_JUMP_VELOCITY - (speed / 10);
                 this.jumping = true;
                 this.reachedMinHeight = false;
                 this.speedDrop = false;
-            }
+                this.introCount++;
+            } //else if (this.introCount>2)
         },
 
         /**
@@ -2778,7 +2783,6 @@
 
 function onDocumentLoad() {
     new Runner('.interstitial-wrapper');
-    console.log('text')
 }
 
 document.addEventListener('DOMContentLoaded', onDocumentLoad);
