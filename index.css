@@ -32,26 +32,29 @@
   font-size: 1em;
   line-height: 1.55;
   margin: 0 auto;
-  max-width: 600px;
+  /*max-width: 600px;*/
   padding-top: 100px;
   width: 100%;
 }
 
 .offline .runner-container {
-  height: 150px;
-  max-width: 600px;
+  /*height: 150px;*/
+  /*max-width: 600px;*/
   overflow: hidden;
-  position: absolute;
+  /*position: absolute; added line below*/
   top: 35px;
   width: 44px;
+  transition: transform 0ms cubic-bezier(0.4, 0, 1, 1) 0ms;
+
 }
 
 .offline .runner-canvas {
-  height: 150px;
-  max-width: 600px;
+  /*height: 150px;*/
+  /*max-width: 600px;*/
   opacity: 1;
   overflow: hidden;
-  position: absolute;
+  /*position: absolute; added line below*/
+  position: relative;
   top: 0;
   z-index: 2;
 }
@@ -160,6 +163,8 @@
   margin: auto;
   right: 0;
   transform-origin: top center;
-  transition: transform 250ms cubic-bezier(0.4, 0, 1, 1) 400ms;
+  transition: transform 0ms cubic-bezier(0.4, 0, 1, 1) 0ms;
   z-index: 2;
 }
+
+/* ADDITIONS */

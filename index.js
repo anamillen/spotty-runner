@@ -383,6 +383,20 @@
 
             this.outerContainerEl.appendChild(this.containerEl);
 
+            //TODO: 
+            //this.setArcadeModeContainerScale();
+            this.playIntro()
+            this.adjustDimensions()
+            this.tRex.draw(0, 0);
+
+
+
+            //this.update();
+
+            //this.time = getTimeStamp();
+            //this.update();
+
+
             if (IS_MOBILE) {
                 this.createTouchController();
             }
@@ -465,7 +479,7 @@
          * Canvas container width expands out to the full width.
          */
         playIntro: function () {
-            if (!this.activated && !this.crashed) {
+            if (!this.activated && !this.crashed){
                 this.playingIntro = true;
                 this.tRex.playingIntro = true;
 
@@ -484,14 +498,17 @@
                 this.containerEl.addEventListener(Runner.events.ANIM_END,
                     this.startGame.bind(this));
 
-                this.containerEl.style.webkitAnimation = 'intro .4s ease-out 1 both';
+                this.containerEl.style.webkitAnimation = 'intro ease-out 1 both';
                 this.containerEl.style.width = this.dimensions.WIDTH + 'px';
 
                 // if (this.touchController) {
                 //     this.outerContainerEl.appendChild(this.touchController);
                 // }
+            if (!this.activated && !this.crashed) {
                 this.playing = true;
                 this.activated = true;
+            }
+                
             } else if (this.crashed) {
                 this.restart();
             }
