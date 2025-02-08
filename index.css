@@ -43,6 +43,7 @@
   width: 600px;
   height: 150px;
   overflow: hidden;
+  position: absolute;
   flex-shrink: 0; /* Prevent runner from shrinking */
   margin: 0 auto; /* Center horizontally */
   transition: transform 0ms cubic-bezier(0.4, 0, 1, 1) 0ms;
@@ -169,11 +170,11 @@
 }
 
 .bottom-container {
-  flex-grow: 1; /* Take up remaining space */
   width: 100%;
-  position: relative; /* For proper stacking context */
+  position: absolute;
+  top: 0;
+  bottom: 0;
   z-index: 1;
-
 }
 
 

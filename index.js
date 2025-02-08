@@ -921,6 +921,10 @@
             const cssScale = scale;
             this.containerEl.style.transform =
                 'scale(' + cssScale + ') translateY(' + translateY + 'px)';
+
+            const bottomContainer = document.querySelector('.bottom-container');
+            const effectiveRunnerHeight = scaledCanvasHeight + translateY;
+            bottomContainer.style.top = `${effectiveRunnerHeight}px`;
         },
         
         /**
