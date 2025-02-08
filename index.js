@@ -53,6 +53,7 @@
         this.resizeTimerId_ = null;
 
         this.playCount = 0;
+        this.introCount = 0;
 
         // Sound FX.
         this.audioBuffer = null;
@@ -480,8 +481,14 @@
          */
         playIntro: function () {
             if (!this.activated && !this.crashed){
+
                 this.playingIntro = true;
-                this.tRex.playingIntro = true;
+
+                if (this.introCount > 0) {
+                    this.tRex.playingIntro = true;
+
+                }
+
 
                 // CSS animation definition.
                 var keyframes = '@-webkit-keyframes intro { ' +
@@ -512,6 +519,7 @@
             } else if (this.crashed) {
                 this.restart();
             }
+            this.introCount += 1
         },
 
 
@@ -742,6 +750,7 @@
                 e.type == Runner.events.MOUSEDOWN;
 
             if (this.isRunning() && isjumpKey) {
+                //TODO:
                 this.tRex.endJump();
             } else if (Runner.keycodes.DUCK[keyCode]) {
                 this.tRex.speedDrop = false;
