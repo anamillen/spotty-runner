@@ -173,6 +173,7 @@
 
 .bottom-container {
   width: 100%;
+  min-height: 1920px;
   position: absolute;
   top: 0;
   bottom: 0;
