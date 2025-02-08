@@ -46,9 +46,6 @@
 
         this.activated = false; // Whether the easter egg has been activated.
         this.playing = false; // Whether the game is currently in play state.
-        //TODO: the parameter which will resize the window onload
-        this.window_resize = true
-        this.end_of_resize = false
         this.crashed = false;
         this.paused = false;
         this.inverted = false;
@@ -72,8 +69,6 @@
             this.setupDisabledRunner();
         } else {
             this.loadImages();
-            
-            
         }
     }
     window['Runner'] = Runner;
@@ -357,7 +352,6 @@
          */
         init: function () {
             // Hide the static icon.
-            //TODO: THIS FUNCTION LOADS EVERYTHING ON DOCUMENT LOAD
             document.querySelector('.' + Runner.classes.ICON).style.visibility =
                 'hidden';
 
@@ -387,22 +381,17 @@
             // Draw t-rex
             this.tRex = new Trex(this.canvas, this.spriteDef.TREX);
 
-            //TODO: THIS LOADS THE DINO ON LOAD SCREEN
-
             this.outerContainerEl.appendChild(this.containerEl);
-            
 
             if (IS_MOBILE) {
                 this.createTouchController();
             }
 
             this.startListening();
+            this.update();
+
             window.addEventListener(Runner.events.RESIZE,
                 this.debounceResize.bind(this));
-            this.update();
-        
-            
-            
         },
 
         /**
@@ -420,7 +409,7 @@
         debounceResize: function () {
             if (!this.resizeTimerId_) {
                 this.resizeTimerId_ =
-                    setInterval(this.adjustDimensions.bind(this), 0);
+                    setInterval(this.adjustDimensions.bind(this), 250);
             }
         },
 
@@ -438,7 +427,6 @@
             this.dimensions.WIDTH = this.outerContainerEl.offsetWidth - padding * 2;
             this.dimensions.WIDTH = Math.min(DEFAULT_WIDTH, this.dimensions.WIDTH); //Arcade Mode
             if (this.activated) {
-                //TODO: this line below readjusts the canvas when the browser window is resized
                 this.setArcadeModeContainerScale();
             }
             
@@ -451,22 +439,15 @@
 
                 this.distanceMeter.calcXPos(this.dimensions.WIDTH);
                 this.clearCanvas();
-                if (this.window_resize){
-                    this.horizon.update(0, 0, true);
-                    this.tRex.update(0);
-
-                }
+                this.horizon.update(0, 0, true);
+                this.tRex.update(0);
 
                 // Outer container and distance meter.
-                //TODO: added window_resize to
-                //TODO: if (this.playing || this.crashed || this.paused)
-                if (this.window_resize || this.playing || this.crashed || this.paused) {
-                    //TODO:
+                if (this.playing || this.crashed || this.paused) {
                     this.containerEl.style.width = this.dimensions.WIDTH + 'px';
                     this.containerEl.style.height = this.dimensions.HEIGHT + 'px';
                     this.distanceMeter.update(0, Math.ceil(this.distanceRan));
                     this.stop();
-                    
                 } else {
                     this.tRex.draw(0, 0);
                 }
@@ -483,27 +464,17 @@
          * Play the game intro.
          * Canvas container width expands out to the full width.
          */
-        //TODO: ici on fait de la merde
-        /*
-        resizeWindow: function () {
-            this.containerEl.style.webkitAnimation = '.4s intro  ease-out 1 both';
-        },
-        */
-
         playIntro: function () {
-            //TODO: THIS FUNCTION RESIZES THE WINDOW (THE BOUNCE ANIMATION AT START)
-            //      BUT DOESN"T ACTUALLY START THE GAME (YAY)
             if (!this.activated && !this.crashed) {
                 this.playingIntro = true;
                 this.tRex.playingIntro = true;
 
                 // CSS animation definition.
                 var keyframes = '@-webkit-keyframes intro { ' +
-                    //TODO: 'from { width:' + Trex.config.WIDTH + 'px }' +
-                    'from { width:' + this.dimensions.WIDTH + 'px }' +
+                    'from { width:' + Trex.config.WIDTH + 'px }' +
                     'to { width: ' + this.dimensions.WIDTH + 'px }' +
                     '}';
-                this.end_of_resize = true
+                
                 // create a style sheet to put the keyframe rule in 
                 // and then place the style sheet in the html head    
                 var sheet = document.createElement('style');
@@ -512,22 +483,15 @@
 
                 this.containerEl.addEventListener(Runner.events.ANIM_END,
                     this.startGame.bind(this));
-                //TODO: COMMENTED OUT .4s from 'intro ease-out 1 both';
-                this.containerEl.style.webkitAnimation = 'intro ease-out 0 both';
+
+                this.containerEl.style.webkitAnimation = 'intro .4s ease-out 1 both';
                 this.containerEl.style.width = this.dimensions.WIDTH + 'px';
-                //this.containerEl.style.display = 'inline-block';
-                
 
                 // if (this.touchController) {
                 //     this.outerContainerEl.appendChild(this.touchController);
                 // }
-                //TODO: HERE'S THE ACTUAL MOUVEMENT ACTIVATED
-                //TODO: commented out this.playing = true
-                //this.playing = true;
+                this.playing = true;
                 this.activated = true;
-                //TODO: trying to load the window
-                //TODO: this.containerEl.style.display="inline-block"
-                //TODO: console.log("meow")
             } else if (this.crashed) {
                 this.restart();
             }
@@ -538,9 +502,7 @@
          * Update the game status to started.
          */
         startGame: function () {
-            //TODO: the resized window on start happens here
             this.setArcadeMode();
-            
             this.runningTime = 0;
             this.playingIntro = false;
             this.tRex.playingIntro = false;
@@ -556,8 +518,8 @@
 
             window.addEventListener(Runner.events.FOCUS,
                 this.onVisibilityChange.bind(this));
-            
         },
+
         clearCanvas: function () {
             this.canvasCtx.clearRect(0, 0, this.dimensions.WIDTH,
                 this.dimensions.HEIGHT);
@@ -573,40 +535,23 @@
             var deltaTime = now - (this.time || now);
             this.time = now;
 
-            //TODO: added window_resize (the window isn't resized here)
-            //TODO: THE CURRENT STATE OF THE CANVAS IS UPDATE HERE
-            if (this.playing || this.window_resize) {
+            if (this.playing) {
                 this.clearCanvas();
-                if (this.playing) {
-                    if (this.tRex.jumping) {
-                        this.tRex.updateJump(deltaTime);
-                    }
+
+                if (this.tRex.jumping) {
+                    this.tRex.updateJump(deltaTime);
                 }
-                
 
                 this.runningTime += deltaTime;
                 var hasObstacles = this.runningTime > this.config.CLEAR_TIME;
 
-                //TODO: trying to resize the window right on load (the window isn't resized here)
-                //TODO: added window_resize
-                //TODO: if (this.tRex.jumpCount == 0 && !this.playingIntro)
-                /*
-                if ((this.tRex.jumpCount == 0 && !this.playingIntro) || this.window_resize) {
-                    this.resizeWindow();
-                }
-                */
-
                 // First jump triggers the intro.
-
-                //TODO: added window_resize to (this.tRex.jumpCount == 1 && !this.playingIntro)
-                //TODO: HERE THE WINDOW IS RESIZED AND THE GAME IS STARTED
-                if ((this.tRex.jumpCount == 1 && !this.playingIntro) || this.window_resize) {
+                if (this.tRex.jumpCount == 1 && !this.playingIntro) {
                     this.playIntro();
                 }
 
                 // The horizon doesn't move until the intro is over.
                 if (this.playingIntro) {
-                    // TODO: the line below displays the horizon
                     this.horizon.update(0, this.currentSpeed, hasObstacles);
                 } else {
                     deltaTime = !this.activated ? 0 : deltaTime;
@@ -627,7 +572,7 @@
                 } else {
                     this.gameOver();
                 }
-                // TODO: this line shows the small distance meter
+
                 var playAchievementSound = this.distanceMeter.update(deltaTime,
                     Math.ceil(this.distanceRan));
 
@@ -658,10 +603,8 @@
                 }
             }
 
-            //TODO: THIS FUNCTION SETS THE BACKGROUND TO RUN
             if (this.playing || (!this.activated &&
-                this.tRex.blinkCount < Runner.config.MAX_BLINK_COUNT)
-            ) {
+                this.tRex.blinkCount < Runner.config.MAX_BLINK_COUNT)) {
                 this.tRex.update(deltaTime);
                 this.scheduleNextUpdate();
             }
@@ -728,7 +671,6 @@
          * Process keydown.
          * @param {Event} e
          */
-        //TODO: KEY HANDLINNG HAPPENS HERE
         onKeyDown: function (e) {
             // Prevent native page scrolling whilst tapping on mobile.
             if (IS_MOBILE && this.playing) {
@@ -740,7 +682,6 @@
                     e.type == Runner.events.TOUCHSTART)) {
                     if (!this.playing) {
                         this.loadSounds();
-                        //TODO: the line below desactivates the entire arcade regime
                         this.playing = true;
                         this.update();
                         if (window.errorPageController) {
@@ -908,21 +849,13 @@
         setArcadeMode() {
             document.body.classList.add(Runner.classes.ARCADE_MODE);
             this.setArcadeModeContainerScale();
-            //TODO: ADDED THE LINE BELOW
-            //      LOADS THE TREX ON DOCUMENT LOAD
-            this.tRex.draw(0, 0);
-            this.tRex.update(0, Trex.status.WAITING);
-            //this.tRex.reset();
-
-
         },
 
         /**
          * Sets the scaling for arcade mode.
          */
-        //TODO: THIS FUNCTION CONFIGURES THE DIMENSIONS CHANGE
         setArcadeModeContainerScale() {
-            const windowHeight =  window.innerHeight;
+            const windowHeight = window.innerHeight;
             const scaleHeight = windowHeight / this.dimensions.HEIGHT;
             const scaleWidth = window.innerWidth / this.dimensions.WIDTH;
             const scale = Math.max(1, Math.min(scaleHeight, scaleWidth));
@@ -935,13 +868,8 @@
                   window.devicePixelRatio;
 
             const cssScale = scale;
-            //TODO: commenting out these two lines below will disable the zoom animation
             this.containerEl.style.transform =
-                 'scale(' + cssScale + ') translateY(' + translateY + 'px)';
-            //TODO: 
-            //this.containerEl.style.display = 'inline-block';
-            
-            
+                'scale(' + cssScale + ') translateY(' + translateY + 'px)';
         },
         
         /**
@@ -954,7 +882,6 @@
             } else if (!this.crashed) {
                 this.tRex.reset();
                 this.play();
-                
             }
         },
 
@@ -1030,7 +957,6 @@
             canvas.style.width = canvas.width + 'px';
             canvas.style.height = canvas.height + 'px';
         }
-        
         return false;
     };
 
@@ -1149,7 +1075,6 @@
             if (opt_height) {
                 this.canvasDimensions.HEIGHT = opt_height;
             }
-
         },
 
         /**
@@ -1199,7 +1124,6 @@
                 restartSourceWidth, restartSourceHeight,
                 restartTargetX, restartTargetY, dimensions.RESTART_WIDTH,
                 dimensions.RESTART_HEIGHT);
-            
         }
     };
 
@@ -1464,7 +1388,6 @@
                     sourceWidth * this.size, sourceHeight,
                     this.xPos, this.yPos,
                     this.typeConfig.width * this.size, this.typeConfig.height);
-                
             },
 
             /**
@@ -1765,7 +1688,7 @@
             }
 
             // Game intro animation, T-rex moves in from the left.
-            if ((this.playingIntro && this.xPos < this.config.START_X_POS)) {
+            if (this.playingIntro && this.xPos < this.config.START_X_POS) {
                 this.xPos += Math.round((this.config.START_X_POS /
                     this.config.INTRO_DURATION) * deltaTime);
             }
@@ -2542,7 +2465,6 @@
          * Draw the horizon line.
          */
         draw: function () {
-            //TODO: if (this.end_of_resize){
             this.canvasCtx.drawImage(Runner.imageSprite, this.sourceXPos[0],
                 this.spritePos.y,
                 this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
@@ -2554,7 +2476,6 @@
                 this.sourceDimensions.WIDTH, this.sourceDimensions.HEIGHT,
                 this.xPos[1], this.yPos,
                 this.dimensions.WIDTH, this.dimensions.HEIGHT);
-            //TODO: } 
         },
 
         /**
@@ -2589,8 +2510,7 @@
             } else {
                 this.updateXPos(1, increment);
             }
-            //TODO: THE LINE BELOW SHOWS THE HORIZON LINE
-                this.draw();
+            this.draw();
         },
 
         /**
@@ -2825,15 +2745,8 @@
 })();
 
 
-function meow() {
-    console.log("text");
-};
-
-
 function onDocumentLoad() {
     new Runner('.interstitial-wrapper');
-    meow();
 }
 
 document.addEventListener('DOMContentLoaded', onDocumentLoad);
-
