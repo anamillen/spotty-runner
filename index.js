@@ -846,6 +846,7 @@
                 this.playing = true;
                 this.paused = false;
                 this.tRex.update(0, Trex.status.RUNNING);
+                //this.tRex.reset();
                 this.time = getTimeStamp();
                 this.update();
             }
@@ -1716,10 +1717,13 @@
             }
 
             // Game intro animation, T-rex moves in from the left.
+            /*
+            //TODO: 
             if (this.playingIntro && this.xPos < this.config.START_X_POS) {
                 this.xPos += Math.round((this.config.START_X_POS /
                     this.config.INTRO_DURATION) * deltaTime);
             }
+                    */
 
             if (this.status == Trex.status.WAITING) {
                 this.blink(getTimeStamp());
