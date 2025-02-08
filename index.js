@@ -747,7 +747,7 @@
             var keyCode = String(e.keyCode);
             var isjumpKey = Runner.keycodes.JUMP[keyCode] ||
                 //TODO: e.type == Runner.events.TOUCHEND ||
-                e.type == Runner.events.TOUCHSTART||
+                e.type == Runner.events.TOUCHEND ||
                 e.type == Runner.events.MOUSEDOWN;
 
             if (this.isRunning() && isjumpKey) {
@@ -761,11 +761,12 @@
                 var deltaTime = getTimeStamp() - this.time;
 
                 if (Runner.keycodes.RESTART[keyCode] || this.isLeftClickOnCanvas(e) ||
-                    (deltaTime >= this.config.GAMEOVER_CLEAR_TIME &&
-                        Runner.keycodes.JUMP[keyCode])) {
+                //TODO: changed  (deltaTime >= this.config.GAMEOVER_CLEAR_TIME && Runner.keycodes.JUMP[keyCode]))
+                    (deltaTime >= 10 &&
+                        isjumpKey)) {
                     this.restart();
                 }
-            } else if (isjumpKey) {
+            } else if (this.paused && isjumpKey) {
                 // Reset the jump state
                 this.tRex.reset();
                 this.play();
