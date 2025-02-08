@@ -577,7 +577,6 @@
             //TODO: THE CURRENT STATE OF THE CANVAS IS UPDATE HERE
             if (this.playing || this.window_resize) {
                 this.clearCanvas();
-                
                 if (this.playing) {
                     if (this.tRex.jumping) {
                         this.tRex.updateJump(deltaTime);
@@ -601,7 +600,9 @@
 
                 //TODO: added window_resize to (this.tRex.jumpCount == 1 && !this.playingIntro)
                 //TODO: HERE THE WINDOW IS RESIZED AND THE GAME IS STARTED
-                
+                if ((this.tRex.jumpCount == 1 && !this.playingIntro) || this.window_resize) {
+                    this.playIntro();
+                }
 
                 // The horizon doesn't move until the intro is over.
                 if (this.playingIntro) {
