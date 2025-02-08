@@ -925,6 +925,9 @@
             const bottomContainer = document.querySelector('.bottom-container');
             const effectiveRunnerHeight = scaledCanvasHeight + translateY;
             bottomContainer.style.top = `${effectiveRunnerHeight}px`;
+
+            const interstitialWrapper = document.querySelector('.interstitial-wrapper');
+            interstitialWrapper.style.height = `${windowHeight}px`;
         },
         
         /**

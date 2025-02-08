@@ -37,7 +37,10 @@
   height: 100vh; /* Make it full viewport height */
   display: flex; /* Use flexbox for layout */
   flex-direction: column; /* Stack children vertically */
-  background-color: #a3bfc4;
+  /*The background image settings*/
+  background-image: url('./test-assets/sky.jpg');
+  background-size: cover;
+  background-position:top;
   
 }
 
