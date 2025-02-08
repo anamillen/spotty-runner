@@ -910,7 +910,10 @@
             this.setArcadeModeContainerScale();
             //TODO: ADDED THE LINE BELOW
             //      LOADS THE TREX ON DOCUMENT LOAD
-            this.tRex.update(0, Trex.status.JUMPING);
+            this.tRex.draw(0, 0);
+            this.tRex.update(0, Trex.status.WAITING);
+            //this.tRex.reset();
+
 
         },
 
