@@ -52,6 +52,8 @@
         this.invertTimer = 0;
         this.resizeTimerId_ = null;
 
+        this.game_started = false
+
         this.playCount = 0;
         this.introCount = 0;
 
@@ -574,6 +576,7 @@
                 if (this.tRex.jumpCount == 1 && !this.playingIntro) {
                     this.playIntro();
                     this.introCount++;
+                    this.game_started = true;
                 }
 
                 // The horizon doesn't move until the intro is over.
@@ -718,14 +721,23 @@
                     //  Play sound effect and jump on starting the game for the first time.
                     if (!this.tRex.jumping && !this.tRex.ducking ) {
                         this.playSound(this.soundFx.BUTTON_PRESS);
+
                         //TODO: 'startJump"
-                        this.tRex.reset()
-                        //this.tRex.startJump(this.currentSpeed);
+                        if (!this.game_started ) {
+                            this.tRex.reset()
+                            this.tRex.jumpCount++;
+                            this.game_started = true
+
+                        } else {
+                            this.tRex.startJump(this.currentSpeed);
+
+                        }
+
 
                     }
                 }
 
-                if (this.crashed && e.type == Runner.events.TOUCHSTART &&
+                if (this. crashed && e.type == Runner.events.TOUCHSTART &&
                     e.currentTarget == this.containerEl) {
                     this.restart();
                 }
