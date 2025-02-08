@@ -768,8 +768,9 @@
                 }
             } else if (this.paused && isjumpKey) {
                 // Reset the jump state
-                this.tRex.reset();
+                //TODO:
                 this.play();
+                this.tRex.reset();
             }
         },
 
@@ -1717,13 +1718,10 @@
             }
 
             // Game intro animation, T-rex moves in from the left.
-            /*
-            //TODO: 
             if (this.playingIntro && this.xPos < this.config.START_X_POS) {
                 this.xPos += Math.round((this.config.START_X_POS /
                     this.config.INTRO_DURATION) * deltaTime);
             }
-                    */
 
             if (this.status == Trex.status.WAITING) {
                 this.blink(getTimeStamp());
@@ -2780,6 +2778,7 @@
 
 function onDocumentLoad() {
     new Runner('.interstitial-wrapper');
+    console.log('text')
 }
 
 document.addEventListener('DOMContentLoaded', onDocumentLoad);
