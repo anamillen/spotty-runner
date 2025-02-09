@@ -2820,6 +2820,7 @@
 
 
 function onDocumentLoad() {
+    
     new Runner('.interstitial-wrapper');
 }
 
