@@ -76,7 +76,7 @@
     }
     window['Runner'] = Runner;
 
-
+    
     /**
      * Default game width.
      * @const
@@ -156,8 +156,13 @@
         SNACKBAR: 'snackbar',
         SNACKBAR_SHOW: 'snackbar-show',
         TOUCH_CONTROLLER: 'controller',
-        BOTTOM_CONTAINER: 'bottom-container'
+        BOTTOM_CONTAINER: 'bottom-container',
+        BACKGROUND_IMAGE: 'background-image'
     };
+
+    //TODO: SET THE GROUND BACKGROUND IMAGE
+    Runner.img_link = "./test-assets/ground.jpg"
+
 
 
     /**
@@ -390,6 +395,15 @@
             this.containerBottom = document.createElement('div');
             this.outerContainerEl.appendChild(this.containerBottom);
             this.containerBottom.className = Runner.classes.BOTTOM_CONTAINER;
+
+            //TODO: BOTTOM CONTAINER IMAGE
+            const backgroundImage = document.createElement('img');
+            backgroundImage.className = Runner.classes.BACKGROUND_IMAGE;
+            backgroundImage.src = Runner.img_link; 
+            this.containerBottom.appendChild(backgroundImage);
+
+
+
 
 
             //TODO: 
