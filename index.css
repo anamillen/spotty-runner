@@ -6,7 +6,11 @@
   padding: 0;
   margin: 0;
   width: 100%;
+  min-height: 1920px;
   height: 100%;
+  overflow-y: auto;
+
+
 }
 
 .icon {
