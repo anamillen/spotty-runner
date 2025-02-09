@@ -7,8 +7,8 @@
   margin: 0;
   width: 100%;
   overflow-y:visible;
-
-  height: calc(100vw * 16 / 9);
+  position: fixed;
+  height: auto !important;
 
 }
 
