@@ -8,7 +8,7 @@
   width: 100%;
   min-height: 1920px;
   height: 100%;
-  overflow-y: auto;
+  overflow-y:visible;
 
 
 }
@@ -180,6 +180,7 @@
   position: absolute;
   z-index: 1;
   background-color: rgb(65, 75, 59);
+  margin-top: -15px;
 }
 
 
