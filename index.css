@@ -2,11 +2,14 @@
  * Use of this source code is governed by a BSD-style license that can be
  * found in the LICENSE file. */
 
-html, body {
+ html, body {
   padding: 0;
   margin: 0;
   width: 100%;
-  height: 100%;
+  overflow-y:visible;
+  position: fixed;
+  height: auto !important;
+
 }
 
 .icon {
@@ -18,7 +21,6 @@ html, body {
 .icon-offline {
   content: -webkit-image-set( url(assets/default_100_percent/100-error-offline.png) 1x, url(assets/default_200_percent/200-error-offline.png) 2x);
   position: relative;
-  display: none;
 }
 
 .hidden {
@@ -33,31 +35,33 @@ html, body {
   font-size: 1em;
   line-height: 1.55;
   margin: 0 auto;
-  max-width: 600px;
-  padding-top: 100px;
   width: 100%;
+  height: 100%; /* Make it full viewport height */
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Stack children vertically */
+  
 }
 
 .offline .runner-container {
-  /*TODO: changed height:150px to 10px*/
+  width: 600px;
   height: 150px;
-  max-width: 600px;
   overflow: hidden;
   position: absolute;
-  top: 35px;
-  width: 44px;
-  /*TODO: added display: none*/
+  flex-shrink: 0; /* Prevent runner from shrinking */
+  margin: 0 auto; /* Center horizontally */
+  transition: transform 0ms cubic-bezier(0.4, 0, 1, 1) 0ms;
+
 }
 
 .offline .runner-canvas {
-  height: 150px;
-  max-width: 600px;
+  /*height: 150px;*/
+  /*max-width: 600px;*/
   opacity: 1;
   overflow: hidden;
-  position: absolute;
+  /*position: absolute; added line below*/
+  position: relative;
   top: 0;
   z-index: 2;
-  display: inherit;
 }
 
 .offline .controller {
@@ -143,8 +147,7 @@ html, body {
 .arcade-mode .runner-container,
 .arcade-mode .runner-canvas {
   image-rendering: pixelated;
-  max-width: 1920;
-  width: 100%; /*TODO: */
+  max-width: 100%;
   overflow: hidden;
 }
 
@@ -165,7 +168,31 @@ html, body {
   margin: auto;
   right: 0;
   transform-origin: top center;
-  /*TODO: changed     transition: transform 250ms cubic-bezier(0.4, 0, 1, 1) 400ms;*/
-  transition: transform;
+  transition: transform 0ms cubic-bezier(0.4, 0, 1, 1) 0ms;
   z-index: 2;
+}
+
+.bottom-container {
+  width: 100%;
+  min-height: 1080px;
+  position: absolute;
+  z-index: 1;
+  background-color: rgb(65, 75, 59);
+  margin-top: -15px;
+  overflow-y: visible;
+}
+
+
+
+/* BACKGROUNDS */
+
+
+.background-image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
 }
