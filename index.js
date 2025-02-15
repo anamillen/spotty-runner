@@ -139,7 +139,7 @@
     Runner.defaultDimensions = {
         WIDTH: DEFAULT_WIDTH,
         //TODO2
-        HEIGHT: 900
+        HEIGHT: 1200
 
     };
 
@@ -1167,14 +1167,16 @@
             var textSourceHeight = dimensions.TEXT_HEIGHT;
 
             var textTargetX = Math.round(centerX - (dimensions.TEXT_WIDTH / 2));
-            var textTargetY = Math.round((this.canvasDimensions.HEIGHT - 25) / 3);
+            //TODO2
+            var textTargetY = Math.round((this.canvasDimensions.HEIGHT - (1200 - 150) - 25) / 3);
             var textTargetWidth = dimensions.TEXT_WIDTH;
             var textTargetHeight = dimensions.TEXT_HEIGHT;
 
             var restartSourceWidth = dimensions.RESTART_WIDTH;
             var restartSourceHeight = dimensions.RESTART_HEIGHT;
             var restartTargetX = centerX - (dimensions.RESTART_WIDTH / 2);
-            var restartTargetY = this.canvasDimensions.HEIGHT / 2;
+            //TODO2
+            var restartTargetY = (this.canvasDimensions.HEIGHT - (1200 - 150)) / 2;
 
             if (IS_HIDPI) {
                 textSourceY *= 2;
@@ -1221,7 +1223,7 @@
         var tRexBox = new CollisionBox(
             tRex.xPos + 1 ,
             //TODO2
-            tRex.yPos + 1 - (900 - 150),
+            tRex.yPos + 1 - (1200 - 150),
             tRex.config.WIDTH - 2,
             tRex.config.HEIGHT - 2);
 
@@ -1827,7 +1829,7 @@
                 this.canvasCtx.drawImage(Runner.imageSprite, sourceX, sourceY,
                     sourceWidth, sourceHeight,
                     //TODO2
-                    this.xPos, this.yPos - (900 - 150),
+                    this.xPos, this.yPos - (1200 - 150),
                     this.config.WIDTH, this.config.HEIGHT);
             }
         },
@@ -2506,7 +2508,7 @@
     HorizonLine.dimensions = {
         WIDTH: 600,
         //TODO2
-        HEIGHT: 900,
+        HEIGHT: 1200,
         YPOS: 127
         //YPOS: 587
     };
