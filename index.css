@@ -46,7 +46,7 @@
 .offline .runner-container {
   width: 600px;
   height: 150px;
-  overflow: hidden;
+  overflow: visible;
   position: absolute;
   flex-shrink: 0; /* Prevent runner from shrinking */
   margin: 0 auto; /* Center horizontally */
@@ -58,7 +58,7 @@
   /*height: 150px;*/
   /*max-width: 600px;*/
   opacity: 1;
-  overflow: hidden;
+  overflow: visible;
   /*position: absolute; added line below*/
   position: relative;
   top: 0;
