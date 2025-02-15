@@ -139,7 +139,7 @@
     Runner.defaultDimensions = {
         WIDTH: DEFAULT_WIDTH,
         //TODO2
-        HEIGHT: 1200
+        HEIGHT: 900
 
     };
 
@@ -173,28 +173,28 @@
      */
     Runner.spriteDefinition = {
         LDPI: {
-            CACTUS_LARGE: { x: 332, y: 2 },
-            CACTUS_SMALL: { x: 228, y: 2 },
-            CLOUD: { x: 86, y: 2 },
-            HORIZON: { x: 2, y: 54 },
-            MOON: { x: 484, y: 2 },
-            PTERODACTYL: { x: 134, y: 2 },
-            RESTART: { x: 2, y: 2 },
-            TEXT_SPRITE: { x: 655, y: 2 },
-            TREX: { x: 848, y: 2 },
-            STAR: { x: 645, y: 2 }
+            CACTUS_LARGE: { x: 332, y: 6 },
+            CACTUS_SMALL: { x: 228, y: 6 },
+            CLOUD: { x: 86, y: 6 },
+            HORIZON: { x: 2, y: 58 },
+            MOON: { x: 484, y: 6 },
+            PTERODACTYL: { x: 134, y: 6 },
+            RESTART: { x: 2, y: 6 },
+            TEXT_SPRITE: { x: 655, y: 6 },
+            TREX: { x: 848, y: 0 },
+            STAR: { x: 645, y: 6 }
         },
         HDPI: {
-            CACTUS_LARGE: { x: 652, y: 2 },
-            CACTUS_SMALL: { x: 446, y: 2 },
-            CLOUD: { x: 166, y: 2 },
-            HORIZON: { x: 2, y: 104 },
-            MOON: { x: 954, y: 2 },
-            PTERODACTYL: { x: 260, y: 2 },
-            RESTART: { x: 2, y: 2 },
-            TEXT_SPRITE: { x: 1294, y: 2 },
-            TREX: { x: 1678, y: 2 },
-            STAR: { x: 1276, y: 2 }
+            CACTUS_LARGE: { x: 652, y: 6 },
+            CACTUS_SMALL: { x: 446, y: 6 },
+            CLOUD: { x: 166, y: 6 },
+            HORIZON: { x: 2, y: 108 },
+            MOON: { x: 954, y: 6 },
+            PTERODACTYL: { x: 260, y: 6 },
+            RESTART: { x: 2, y: 6 },
+            TEXT_SPRITE: { x: 1294, y: 6 },
+            TREX: { x: 1678, y: 0 },
+            STAR: { x: 1276, y: 6 }
         }
     };
 
@@ -1168,7 +1168,7 @@
 
             var textTargetX = Math.round(centerX - (dimensions.TEXT_WIDTH / 2));
             //TODO2
-            var textTargetY = Math.round((this.canvasDimensions.HEIGHT - (1200 - 150) - 25) / 3);
+            var textTargetY = Math.round((this.canvasDimensions.HEIGHT - (900 - 150) - 25) / 3);
             var textTargetWidth = dimensions.TEXT_WIDTH;
             var textTargetHeight = dimensions.TEXT_HEIGHT;
 
@@ -1176,7 +1176,7 @@
             var restartSourceHeight = dimensions.RESTART_HEIGHT;
             var restartTargetX = centerX - (dimensions.RESTART_WIDTH / 2);
             //TODO2
-            var restartTargetY = (this.canvasDimensions.HEIGHT - (1200 - 150)) / 2;
+            var restartTargetY = (this.canvasDimensions.HEIGHT - (900 - 150)) / 2;
 
             if (IS_HIDPI) {
                 textSourceY *= 2;
@@ -1223,7 +1223,7 @@
         var tRexBox = new CollisionBox(
             tRex.xPos + 1 ,
             //TODO2
-            tRex.yPos + 1 - (1200 - 150),
+            tRex.yPos + 1 - (900 - 150),
             tRex.config.WIDTH - 2,
             tRex.config.HEIGHT - 2);
 
@@ -1829,7 +1829,7 @@
                 this.canvasCtx.drawImage(Runner.imageSprite, sourceX, sourceY,
                     sourceWidth, sourceHeight,
                     //TODO2
-                    this.xPos, this.yPos - (1200 - 150),
+                    this.xPos, this.yPos - (900 - 150),
                     this.config.WIDTH, this.config.HEIGHT);
             }
         },
@@ -2508,7 +2508,7 @@
     HorizonLine.dimensions = {
         WIDTH: 600,
         //TODO2
-        HEIGHT: 1200,
+        HEIGHT: 900,
         YPOS: 127
         //YPOS: 587
     };
